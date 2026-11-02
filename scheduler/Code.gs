@@ -23,7 +23,17 @@ function zeitgeberEinrichten() {
   console.log('10-Minuten-Zeitgeber eingerichtet.');
 }
 
+function imPruefzeitfenster_() {
+  // 13:00 bis unmittelbar vor 02:00 in Deutschland, inkl. Sommer-/Winterzeit.
+  const hour = Number(Utilities.formatDate(new Date(), 'Europe/Berlin', 'H'));
+  return hour >= 13 || hour < 2;
+}
+
 function pruefungPlanen() {
+  if (!imPruefzeitfenster_()) {
+    console.log('Außerhalb 13:00–02:00 Europe/Berlin: kein GitHub-Dispatch.');
+    return;
+  }
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(0)) return;
   try {
