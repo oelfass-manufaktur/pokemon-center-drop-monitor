@@ -1,9 +1,46 @@
 {
   "version": 2,
-  "sources": {},
-  "known": [],
+  "sources": {
+    "news-de": "2026-11-02T11:33:33+00:00",
+    "news-en": "2026-11-02T11:33:33+00:00",
+    "pokemon": "2026-11-02T11:33:33+00:00",
+    "reddit": "2026-11-02T11:33:33+00:00",
+    "shop-index": "2026-11-02T11:33:33+00:00"
+  },
+  "known": [
+    "566504a0da7a7819de5a1d2ceef6f599",
+    "7c2cee4a95ed5da2419a9d2ec3589c21",
+    "96c774d6fedf7afb04b9197541f5cd7e",
+    "ceba0f617414a09948e35e41791954ec"
+  ],
   "recent": [],
   "pending": [],
   "batch": [],
-  "updated": ""
+  "updated": "2026-11-02T11:33:33+00:00",
+  "daily_check": {
+    "day": "2026-11-02",
+    "checked": "2026-11-02T11:33:33+00:00",
+    "sources": {
+      "news-de": {
+        "entries": 2,
+        "matches": 0
+      },
+      "news-en": {
+        "entries": 18,
+        "matches": 1
+      },
+      "pokemon": {
+        "entries": 15,
+        "matches": 1
+      },
+      "reddit": {
+        "entries": 17,
+        "matches": 0
+      },
+      "shop-index": {
+        "entries": 0,
+        "matches": 0
+      }
+    }
+  }
 }

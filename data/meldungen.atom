@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>urn:pokemon-upc-monitor:de</id>
+  <title>Nachtara &amp; Psiana – Hinweise zum Pokémon Center Deutschland</title>
+  <updated>2026-11-02T11:33:33+00:00</updated>
+  <author>
+    <name>Pokémon UPC Monitor</name>
+  </author>
+</feed>
