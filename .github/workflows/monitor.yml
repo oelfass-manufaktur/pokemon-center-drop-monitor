@@ -1,7 +1,7 @@
 name: Pokémon UPC Frühwarnsystem
 on:
   schedule:
-    - cron: '7,17,27,37,47,57 * * * *'
+    - cron: '7,17,27,37,47,57 0,11-23 * * *'
   workflow_dispatch:
     inputs:
       send_test_email:
@@ -39,18 +39,32 @@ jobs:
       group: pokemon-upc-publisher
       cancel-in-progress: false
     steps:
+      - name: Prüfzeitfenster nach deutscher Ortszeit (13:00 bis 02:00)
+        id: window
+        shell: bash
+        run: |
+          local_hour=$(TZ=Europe/Berlin date +%H)
+          echo "Uhrzeit in Deutschland: $(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M %Z')"
+          if [ "$local_hour" -ge 13 ] || [ "$local_hour" -lt 2 ]; then
+            echo "active=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "Außerhalb des Prüfzeitfensters; kein Abruf und keine Benachrichtigung."
+          fi
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        if: ${{ steps.window.outputs.active == 'true' || (github.event_name == 'workflow_dispatch' && inputs.send_test_email) }}
         with:
           ref: main
       - name: Klassifizierung und Versandlogik testen
+        if: ${{ steps.window.outputs.active == 'true' || (github.event_name == 'workflow_dispatch' && inputs.send_test_email) }}
         run: python3 -m unittest discover -s tests -q
       - name: Quellen laden, Meldungen und Versandliste veröffentlichen
-        if: ${{ !inputs.send_test_email }}
+        if: ${{ steps.window.outputs.active == 'true' && !inputs.send_test_email }}
         run: |
           python3 monitor.py collect
           bash scripts/save-state.sh "Publish updated UPC news feed and pending alerts"
       - name: Ausstehende Meldungen zustellen
-        if: ${{ !inputs.send_test_email }}
+        if: ${{ steps.window.outputs.active == 'true' && !inputs.send_test_email }}
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
@@ -60,6 +74,23 @@ jobs:
           bash scripts/save-state.sh "Record accepted UPC notifications"
       - name: Manueller SMTP-Test
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email }}
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+        run: python3 monitor.py test-mail
+
+  smtp_test_once:
+    # Nur der genau markierte Commit auf main startet diesen einmaligen SMTP-Test.
+    # Dieser Job wird nach Prüfung des Ergebnisses wieder entfernt.
+    if: github.event.repository.visibility == 'public' && github.repository == 'oelfass-manufaktur/pokemon-center-drop-monitor' && github.ref == 'refs/heads/main' && github.event_name == 'push' && github.event.head_commit.message == '[SMTP-TEST-ONCE] Validate real delivery'
+    runs-on: ubuntu-slim
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Einmalige als TEST gekennzeichnete SMTP-Mail
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
