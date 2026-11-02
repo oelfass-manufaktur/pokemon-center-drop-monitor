@@ -1,0 +1,13 @@
+# Zweiter Zeitgeber mit Google Apps Script
+
+Dieser private Zeitgeber verwendet den bereits veröffentlichten Python-Workflow, seine Versandliste und Gmail-Konfiguration. Der native GitHub-Zeitplan bleibt verfügbar. Beim Inbetriebnahmetest am 2. November 2026 erschienen über 30 Minuten lang ausschließlich manuelle Läufe. Der zweite Zeitgeber kann die Quellenprüfung über die GitHub-API alle zehn Minuten anstoßen.
+
+1. Verwende ein privates, eigenständiges Google-Apps-Script-Projekt mit dem Inhalt von [Code.gs](Code.gs). Es benötigt ausgehende HTTP-Anfragen und eine Zeitsteuerung. Es verwendet keine Google-Mail- oder Drive-Inhalte.
+2. Erstelle auf GitHub einen **fine-grained personal access token**. Wähle für den Besitzer `oelfass-manufaktur` unter **Only select repositories** ausschließlich `pokemon-center-drop-monitor`. Gewähre die Repository-Berechtigung **Actions → Read and write**. GitHub ergänzt den erforderlichen lesenden Metadatenzugriff. Bei einer befristeten Gültigkeit ist eine Erneuerung vor dem Ablauf nötig.
+3. Speichere den Token direkt im privaten Apps-Script-Projekt unter **Projekteinstellungen → Skripteigenschaften → Skripteigenschaft hinzufügen**. Die Eigenschaft heißt `GITHUB_TIMER_TOKEN`. Ihr Wert ist der GitHub-Token. Die SMTP-Zugangsdaten bleiben in GitHub Actions Secrets.
+4. Führe im Editor einmal **zeitgeberEinrichten** aus und bestätige Googles Berechtigungsdialog. Die Funktion prüft den Zielworkflow und legt genau einen 10-Minuten-Trigger an. Diese Einrichtung löst noch keinen Monitorlauf aus. Der erste zeitgesteuerte Aufruf folgt separat.
+5. Unter **Ausführungen** in Apps Script und **Actions** in GitHub lässt sich die Kette prüfen. GitHub zeigt externe Zeitgeberläufe als `workflow_dispatch` an. Bei einem kürzlich gestarteten oder erfolgreich abgeschlossenen nativen Zeitplanlauf setzt der zweite Zeitgeber diesen Durchgang aus. Aufeinanderfolgende Anfragen desselben Zeitgebers innerhalb von acht Minuten werden unterdrückt.
+
+Der Zeitgeber benötigt für sich und die Prüfung nach dem laufenden kostenlosen Kontingent höchstens etwa 288 reguläre HTTP-Anfragen pro Tag. Google dokumentiert für private Konten 20.000 URL-Fetch-Aufrufe pro Tag. Die zeitgesteuerte Ausführung ist bei beiden Anbietern ein Dienst ohne garantierte Zustellzeit. Der Zugriff lässt sich durch Entfernen des Triggers, Löschen der Skripteigenschaft und Widerrufen des GitHub-Tokens beenden.
+
+[Google-Kontingente](https://developers.google.com/apps-script/guides/services/quotas) · [Google-Zeitgeber](https://developers.google.com/apps-script/reference/script/clock-trigger-builder) · [GitHub-Workflow-API](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)

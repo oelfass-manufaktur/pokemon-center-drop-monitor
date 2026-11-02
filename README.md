@@ -76,3 +76,7 @@ python3 monitor.py collect --data-dir .local-state
 ```
 
 Unter Windows kann `py` anstelle von `python3` verwendet werden. Die lokalen Erhebungen versenden keine E-Mails. Die Tests simulieren Mailübergabe und Fehler. Nur `deliver` mit ausstehenden Meldungen oder `test-mail` baut eine SMTP-Verbindung auf.
+
+## Unabhängiger Zeitgeber bei GitHub-Verzögerungen
+
+Ein privates Google Apps Script kann denselben Workflow im 10-Minuten-Takt anstoßen. Für diesen Weg ist einmalig ein auf dieses Repository begrenzter GitHub-Zugang und ein Google-Zeittrigger erforderlich. Die Python-Prüfung und der Schutz vor doppelten E-Mails bleiben gemeinsam. [Einrichtung und Berechtigungen](scheduler/README.md)
