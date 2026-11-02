@@ -1,0 +1,13 @@
+{
+  "products": [
+    {"name": "Nachtara / Night", "names": ["Nachtara", "Umbreon"], "editions": ["Night", "Nacht"]},
+    {"name": "Psiana / Day", "names": ["Psiana", "Espeon"], "editions": ["Day", "Tag"]}
+  ],
+  "sources": [
+    {"id": "news-de", "name": "Google News Deutschland", "kind": "news", "language": "de", "country": "DE", "query": "(Nachtara OR Psiana OR Umbreon OR Espeon OR Nacht OR Tag) (\"Ultra-Premium\" OR \"Ultra-Premium-Kollektion\" OR UPC) (\"30 Jahre\" OR \"30th Celebration\" OR \"30. Jubiläum\") when:30d"},
+    {"id": "news-en", "name": "Google News Großbritannien", "kind": "news", "language": "en", "country": "GB", "query": "(Umbreon OR Espeon OR Night OR Day) (\"Ultra-Premium\" OR UPC) (\"30th Celebration\" OR \"30th Anniversary\") when:30d"},
+    {"id": "pokemon", "name": "Offizielle Pokémon-Meldungen über Google News", "kind": "official", "language": "en", "country": "GB", "query": "(site:pokemon.com OR site:pokemoncenter.com OR site:pokemon.gamespress.com) (\"30th Celebration\" OR \"30 Jahre\") (\"Ultra-Premium\" OR UPC) when:30d"},
+    {"id": "reddit", "name": "Indexierte Reddit-Beiträge über Google News", "kind": "reddit", "language": "de", "country": "DE", "query": "site:reddit.com (\"Pokémon Center\" OR \"pokemoncenter.com/en-de\") (UPC OR \"Ultra-Premium\") (Nachtara OR Psiana OR Umbreon OR Espeon OR Night OR Day) when:30d"},
+    {"id": "shop-index", "name": "Bing-Suchindex für offizielle DE-Produktseiten", "kind": "shop_index", "query": "site:pokemoncenter.com/en-de/product/ \"30th Celebration\" \"Ultra-Premium\""}
+  ]
+}

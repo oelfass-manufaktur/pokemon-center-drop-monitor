@@ -1,0 +1,67 @@
+name: Pokémon UPC Frühwarnsystem
+on:
+  schedule:
+    - cron: '7,17,27,37,47,57 * * * *'
+  workflow_dispatch:
+    inputs:
+      send_test_email:
+        description: 'Nur eine als TEST markierte E-Mail über SMTP senden'
+        required: false
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths-ignore: ['data/**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    if: github.event.repository.visibility == 'public' && (github.event_name == 'push' || github.event_name == 'pull_request')
+    runs-on: ubuntu-slim
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -v
+
+  publish:
+    if: github.event.repository.visibility == 'public' && github.repository == 'oelfass-manufaktur/pokemon-center-drop-monitor' && github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-slim
+    timeout-minutes: 3
+    permissions:
+      contents: write
+    concurrency:
+      group: pokemon-upc-publisher
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: main
+      - name: Klassifizierung und Versandlogik testen
+        run: python3 -m unittest discover -s tests -q
+      - name: Quellen laden, Meldungen und Versandliste veröffentlichen
+        if: ${{ !inputs.send_test_email }}
+        run: |
+          python3 monitor.py collect
+          bash scripts/save-state.sh "Publish updated UPC news feed and pending alerts"
+      - name: Ausstehende Meldungen zustellen
+        if: ${{ !inputs.send_test_email }}
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+        run: |
+          python3 monitor.py deliver
+          bash scripts/save-state.sh "Record accepted UPC notifications"
+      - name: Manueller SMTP-Test
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.send_test_email }}
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+        run: python3 monitor.py test-mail
