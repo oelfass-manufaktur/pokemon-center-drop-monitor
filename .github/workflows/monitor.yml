@@ -79,20 +79,3 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           ALERT_TO: ${{ secrets.ALERT_TO }}
         run: python3 monitor.py test-mail
-
-  smtp_test_once:
-    # Nur der genau markierte Commit auf main startet diesen einmaligen SMTP-Test.
-    # Dieser Job wird nach Prüfung des Ergebnisses wieder entfernt.
-    if: github.event.repository.visibility == 'public' && github.repository == 'oelfass-manufaktur/pokemon-center-drop-monitor' && github.ref == 'refs/heads/main' && github.event_name == 'push' && github.event.head_commit.message == '[SMTP-TEST-ONCE] Validate real delivery'
-    runs-on: ubuntu-slim
-    timeout-minutes: 3
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-      - name: Einmalige als TEST gekennzeichnete SMTP-Mail
-        env:
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          ALERT_TO: ${{ secrets.ALERT_TO }}
-        run: python3 monitor.py test-mail
