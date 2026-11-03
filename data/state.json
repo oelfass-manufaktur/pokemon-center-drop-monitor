@@ -18,23 +18,23 @@
   "batch": [],
   "updated": "2026-11-02T11:33:33+00:00",
   "daily_check": {
-    "day": "2026-11-03",
-    "checked": "2026-11-02T23:03:28+00:00",
+    "day": "2026-11-04",
+    "checked": "2026-11-03T23:03:15+00:00",
     "sources": {
       "news-de": {
-        "entries": 3,
+        "entries": 4,
         "matches": 0
       },
       "news-en": {
-        "entries": 22,
+        "entries": 10,
         "matches": 1
       },
       "pokemon": {
-        "entries": 16,
+        "entries": 18,
         "matches": 1
       },
       "reddit": {
-        "entries": 20,
+        "entries": 23,
         "matches": 0
       },
       "shop-index": {
