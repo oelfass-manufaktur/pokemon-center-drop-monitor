@@ -16,7 +16,8 @@ from monitor import CONFIG, SUBJECT, collect, deliver, german_time, load_state, 
 
 CONFIG_DATA = json.loads(CONFIG.read_text())
 PRODUCTS = CONFIG_DATA["products"]
-DE, EN, OFFICIAL, REDDIT, INDEX = CONFIG_DATA["sources"]
+DE, EN, OFFICIAL, REDDIT, INDEX = CONFIG_DATA["sources"][:5]
+INDEX_NIGHT, INDEX_DAY = CONFIG_DATA["sources"][5:7]
 FIRST = "2026-11-02T09:00:00+00:00"
 LATER = "2026-11-02T10:00:00+00:00"
 LAST = "2026-11-02T11:00:00+00:00"
@@ -85,6 +86,21 @@ class Matching(unittest.TestCase):
             with self.subTest(url=url):
                 self.assertFalse(de_url(url, product=True))
                 self.assertIsNone(classify(Item(NIGHT, url), INDEX, PRODUCTS))
+
+    def test_variant_specific_de_product_index_sources(self):
+        self.assertEqual(len(CONFIG_DATA["sources"]), 7)
+        self.assertEqual(INDEX_NIGHT["kind"], "shop_index")
+        self.assertEqual(INDEX_DAY["kind"], "shop_index")
+        for source, title, url, expected in (
+            (INDEX_NIGHT, NIGHT, PDP, ["Nachtara / Night"]),
+            (INDEX_DAY, "30th Celebration Ultra-Premium Collection – Day",
+             PDP.replace("night", "day"), ["Psiana / Day"]),
+        ):
+            with self.subTest(source=source["id"]):
+                event = classify(Item(title, url), source, PRODUCTS)
+                self.assertEqual(event["type"], "Produktseite entdeckt")
+                self.assertEqual(event["products"], expected)
+                self.assertEqual(event["link"], url)
 
     def test_official_announcement_and_unverified_retailer(self):
         title = NIGHT + " announced"
@@ -206,6 +222,19 @@ class Persistence(unittest.TestCase):
         self.snapshot([(DE, [], "")], LAST)
         deliver(self.folder, self.mail)
         self.assertEqual(self.mail.call_count, 2)
+
+    def test_new_de_shop_index_source_reports_discovered_pdp_once(self):
+        self.empty()
+        indexed = Item(NIGHT, PDP)
+        self.snapshot([(INDEX_NIGHT, [indexed], "")])
+        deliver(self.folder, self.mail)
+        self.mail.assert_called_once()
+        self.assertIn("Produktseite entdeckt", self.mail.call_args.args[1])
+        self.assertIn(PDP, self.mail.call_args.args[1])
+        self.assertIn("unbekannt", self.mail.call_args.args[1])
+        self.snapshot([(INDEX_DAY, [indexed], ""), (INDEX, [indexed], "")], LAST)
+        deliver(self.folder, self.mail)
+        self.mail.assert_called_once()
 
     def test_partial_outage_has_own_silent_baseline(self):
         self.assertEqual(self.snapshot([(DE, [], ""), (EN, [], "HTTP 429")], FIRST), [EN["name"]])

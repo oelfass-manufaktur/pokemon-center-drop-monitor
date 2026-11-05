@@ -123,7 +123,11 @@ def collect(folder, config, snapshots, stamp):
             event["id"] = key
             # A source that failed to initialize previously builds its own baseline.
             # A fresh match from a healthy, initialized source still wins across sources.
-            fresh = bool(start and (not item.published or item.published >= start))
+            # A direct DE product URL found in a public search index is worth a first-time
+            # alert even when a new index source has not yet established its baseline.
+            # This is URL discovery only: live shop status and stock are not verified.
+            fresh = bool((start and (not item.published or item.published >= start))
+                         or (source["kind"] == "shop_index" and event["type"] == "Produktseite entdeckt"))
             if fresh or event["id"] not in candidates:
                 candidates[event["id"]] = (event, fresh)
         print(f"Quelle {sid}: {len(entries)} Einträge, {matches} passende Treffer"
