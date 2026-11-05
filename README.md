@@ -16,7 +16,7 @@ Der Betreff für neue Meldungen lautet **🔎 POKÉMON UPC – Neuer Drop-Hinwei
 
 ## Quellen
 
-Die fünf Abfragen stehen lesbar in [sources.json](sources.json). Dieselbe Datei enthält die Produktnamen und Editionsbegriffe. Für die ersten vier Abfragen dient Google News als Index.
+Die sieben Abfragen stehen lesbar in [sources.json](sources.json). Dieselbe Datei enthält die Produktnamen und Editionsbegriffe. Für die ersten vier Abfragen dient Google News als Index.
 
 | Abfrage | Welche Treffer zählen |
 | --- | --- |
@@ -25,6 +25,7 @@ Die fünf Abfragen stehen lesbar in [sources.json](sources.json). Dieselbe Datei
 | Offizielle Meldungen | Ein Ergebnis muss Pokémon als Herausgeber erkennen lassen. Die abgerufene RSS-Suchseite allein gilt nicht als offizielle Mitteilung. |
 | Reddit über Google News | Der Treffer muss Reddit zugeordnet sein. In seiner eigenen Überschrift muss z. B. „deutsches Pokémon Center“, „Pokémon Center Germany“ oder eine echte `pokemoncenter.com/en-de`-Adresse stehen. Belegsätze aus Nachbarartikeln, Subreddit-Namen, Europreise oder Deutschlandversand zählen nicht. Unsichere Fragen, Verneinungen und unklare Marktvergleiche werden ausgelassen. Die Mail nennt den konkreten Beleg. |
 | Deutsche Produktlinks über Bing RSS | Nur Treffer mit echtem Pokémon-Center-Host, Deutschlandpfad, Produktkennung und passender Edition. US-/UK-URLs und URLs ähnlich geschriebener Domains werden verworfen. |
+| Zusätzliche Bing-Suchabfragen für Nachtara/Night und Psiana/Day | Getrennte Suchabfragen nach beiden Editionen erhöhen die Chance, eine neue deutsche Produkt-URL im öffentlichen Suchindex zu entdecken. Die Quelle ist **kein** Live-Shop- oder Lagerbestandscheck. |
 
 Der Monitor lädt keine Shop-, Warenkorb- oder Reddit-Seiten. Er führt keine Bestellungen aus. Google News erfasst nur einen Teil der Reddit-Beiträge. Steht der Deutschland-Beleg ausschließlich im Text oder in einem Kommentar, bleibt die Meldung aus. Suchindizes können Veröffentlichungen übersehen oder verspätet liefern. Der offizielle Reddit-Changelog nennt den 13. November 2026 als Ende der nativen RSS-Unterstützung. Für direkten Data-API-Zugriff verlangt Reddit eine Freigabe.
 
@@ -32,7 +33,7 @@ Der Monitor lädt keine Shop-, Warenkorb- oder Reddit-Seiten. Er führt keine Be
 
 ## Betrieb und Kosten
 
-Der Workflow testet den Code, aktualisiert bei Änderungen [den veröffentlichten Atom-Feed](data/meldungen.atom) und verschickt neue Meldungen. Die Feed-Datei entsteht beim ersten erfolgreichen Lauf. Im Zustandsprotokoll `data/state.json` stehen auch einmal pro Berliner Kalendertag Prüfzeit, Quellenstatus und Trefferzahlen. Der erste erfolgreiche Abruf jeder Quelle liefert die stille Ausgangsbasis.
+Der Workflow testet den Code, aktualisiert bei Änderungen [den veröffentlichten Atom-Feed](data/meldungen.atom) und verschickt neue Meldungen. Die Feed-Datei entsteht beim ersten erfolgreichen Lauf. Im Zustandsprotokoll `data/state.json` stehen auch einmal pro Berliner Kalendertag Prüfzeit, Quellenstatus und Trefferzahlen. Der erste erfolgreiche Abruf jeder Nachrichtenquelle liefert die stille Ausgangsbasis. Eine bislang unbekannte, exakt passende deutsche Pokémon-Center-Produkt-URL aus dem öffentlichen Suchindex darf auch beim ersten erfolgreichen Abruf einer neuen Indexquelle eine einmalige E-Mail auslösen; die Kaufbarkeit bleibt ausdrücklich unbestätigt.
 
 - **Takt und Zeitfenster** · Tatsächliche Quellenprüfungen nur täglich von **13:00 bis vor 02:00 Uhr Europe/Berlin** (Sommer-/Winterzeit automatisch). Während dieses Zeitfensters versucht der zusätzliche Google-Apps-Script-Zeitgeber etwa alle 10 Minuten einen GitHub-Workflow zu starten; der GitHub-eigene Cron nutzt die Minuten 07, 17, 27, 37, 47 und 57 in passenden UTC-Stunden. GitHub prüft die deutsche Ortszeit vor dem Abruf nochmals: außerhalb des Fensters werden keine Quellen geladen und keine regulären Meldungen verschickt. Der bereits laufende, privat installierte Apps-Script-Trigger kann außerhalb des Zeitfensters weiterhin leere GitHub-Runs auslösen, bis der aktualisierte Inhalt von `scheduler/Code.gs` auch im Google-Apps-Script-Projekt übernommen wird. Ein markierter manueller SMTP-Test bleibt jederzeit möglich. GitHub kann Starts verzögern oder auslassen; eine feste maximale Prüfungslücke ist nicht garantiert.
 - **Kostengrenze** · Der Veröffentlichungsjob läuft nur im angegebenen öffentlichen Repository auf `main`. Alle Jobs prüfen die öffentliche Sichtbarkeit, bevor ein Runner startet. Verwendet wird der kostenlose GitHub-Standardrunner `ubuntu-slim`, ohne größere Runner, kostenpflichtige Cloud-Ressourcen, Cache- oder Artefakt-Uploads. Es fallen bei den geprüften Konditionen keine Runnergebühren an. Für den Mailversand genügt ein bestehendes kostenloses Gmail-Konto.
