@@ -34,28 +34,8 @@
       "found": "2026-11-05T12:03:12+00:00"
     }
   ],
-  "pending": [
-    {
-      "id": "6c24af54cd6184e8e71a3f13e338b0e4",
-      "link_id": "fccbfaf8d2d462269f36b17ba1de2b86",
-      "type": "Drop-Hinweis gefunden",
-      "products": [
-        "Nachtara / Night",
-        "Psiana / Day"
-      ],
-      "title": "Pokémon TCG: 30th Celebration Ultra-Premium Collections—Day & Night",
-      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMkRFYnZZVl9kSU8yV213NnFsRFc3c0tfOHNkZUpFYnRVaFU0Sl8zU2E5dmU5a3JUbW9zdWZlZmxmaHBBUmN2T3RFYm96UGxESEl4cmtkQTA0WUktZ3RsUml2djdiejk2cVcwVmZmS19ibjZCVURPWldhejlDQzk2cDhrbHQxZFRaRGJjMUd5Q09TUkZraGwwWE5kRE5venRwMGE5U2dQS3B1U0E?oc=5",
-      "source": "Pokemon.com",
-      "index": "Offizielle Pokémon-Meldungen über Google News",
-      "de_proof": "",
-      "reddit": false,
-      "published": "2026-11-05T11:48:11+00:00",
-      "found": "2026-11-05T12:03:12+00:00"
-    }
-  ],
-  "batch": [
-    "6c24af54cd6184e8e71a3f13e338b0e4"
-  ],
+  "pending": [],
+  "batch": [],
   "updated": "2026-11-05T12:03:12+00:00",
   "daily_check": {
     "day": "2026-11-05",
