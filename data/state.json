@@ -10,9 +10,12 @@
     "shop-index-day": "2026-11-05T13:03:14+00:00"
   },
   "known": [
+    "3485f38d78c9b765ab067f055070f8f6",
     "566504a0da7a7819de5a1d2ceef6f599",
     "6c24af54cd6184e8e71a3f13e338b0e4",
     "7c2cee4a95ed5da2419a9d2ec3589c21",
+    "824471341de42da1f1d67fe048eb80f5",
+    "867de327285647c9b107c96726e1b842",
     "96c774d6fedf7afb04b9197541f5cd7e",
     "ceba0f617414a09948e35e41791954ec",
     "fccbfaf8d2d462269f36b17ba1de2b86"
@@ -34,11 +37,48 @@
       "reddit": false,
       "published": "2026-11-05T11:48:11+00:00",
       "found": "2026-11-05T12:03:12+00:00"
+    },
+    {
+      "id": "824471341de42da1f1d67fe048eb80f5",
+      "link_id": "3485f38d78c9b765ab067f055070f8f6",
+      "type": "Drop-Hinweis gefunden",
+      "products": [
+        "Nachtara / Night",
+        "Psiana / Day"
+      ],
+      "title": "Pokémon TCG 30th Celebration Ultra-Premium Collection: Where to Buy the Day and Night Boxes",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQZUViMnE1Qjc1YXFYYThGSmNFVGx5SzRaS19ZQ0RRRnd0d2JJYk5Ed0RsYUtLX0h6UDVHSjh6SERiSUdQZVBieFpzX285YjRTQ3g0cEJHV3lFbExaZlpjcWx6WHBzc0sybGJncmNQU3Q1eEFJREJkNHByMG1uVE95YkV6cTdXLWRjYWF5N040ME8zbWo4UXd1V0Ftbw?oc=5",
+      "source": "IGN",
+      "index": "Google News Großbritannien",
+      "de_proof": "",
+      "reddit": false,
+      "published": "2026-11-06T11:34:53+00:00",
+      "found": "2026-11-06T12:03:13+00:00"
     }
   ],
-  "pending": [],
-  "batch": [],
-  "updated": "2026-11-05T12:03:12+00:00",
+  "pending": [
+    {
+      "id": "824471341de42da1f1d67fe048eb80f5",
+      "link_id": "3485f38d78c9b765ab067f055070f8f6",
+      "type": "Drop-Hinweis gefunden",
+      "products": [
+        "Nachtara / Night",
+        "Psiana / Day"
+      ],
+      "title": "Pokémon TCG 30th Celebration Ultra-Premium Collection: Where to Buy the Day and Night Boxes",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQZUViMnE1Qjc1YXFYYThGSmNFVGx5SzRaS19ZQ0RRRnd0d2JJYk5Ed0RsYUtLX0h6UDVHSjh6SERiSUdQZVBieFpzX285YjRTQ3g0cEJHV3lFbExaZlpjcWx6WHBzc0sybGJncmNQU3Q1eEFJREJkNHByMG1uVE95YkV6cTdXLWRjYWF5N040ME8zbWo4UXd1V0Ftbw?oc=5",
+      "source": "IGN",
+      "index": "Google News Großbritannien",
+      "de_proof": "",
+      "reddit": false,
+      "published": "2026-11-06T11:34:53+00:00",
+      "found": "2026-11-06T12:03:13+00:00"
+    }
+  ],
+  "batch": [
+    "824471341de42da1f1d67fe048eb80f5"
+  ],
+  "updated": "2026-11-06T12:03:13+00:00",
   "daily_check": {
     "day": "2026-11-06",
     "checked": "2026-11-05T23:03:23+00:00",
