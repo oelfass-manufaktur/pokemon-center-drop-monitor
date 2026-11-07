@@ -61,15 +61,15 @@
   "batch": [],
   "updated": "2026-11-06T12:03:13+00:00",
   "daily_check": {
-    "day": "2026-11-07",
-    "checked": "2026-11-06T23:03:12+00:00",
+    "day": "2026-11-08",
+    "checked": "2026-11-07T23:03:13+00:00",
     "sources": {
       "news-de": {
         "entries": 3,
         "matches": 0
       },
       "news-en": {
-        "entries": 26,
+        "entries": 20,
         "matches": 3
       },
       "pokemon": {
@@ -77,19 +77,19 @@
         "matches": 1
       },
       "reddit": {
-        "entries": 18,
+        "entries": 13,
         "matches": 0
       },
       "shop-index": {
-        "entries": 10,
+        "entries": 0,
         "matches": 0
       },
       "shop-index-night": {
-        "entries": 10,
+        "entries": 0,
         "matches": 0
       },
       "shop-index-day": {
-        "entries": 10,
+        "entries": 0,
         "matches": 0
       }
     }
