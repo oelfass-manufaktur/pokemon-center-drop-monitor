@@ -75,27 +75,8 @@
       "found": "2026-11-10T15:43:19+00:00"
     }
   ],
-  "pending": [
-    {
-      "id": "871c75009c34810f3b3f32250b179d46",
-      "link_id": "0982866052ef86a5d75390a59bb7ee66",
-      "type": "Drop-Hinweis gefunden",
-      "products": [
-        "Nachtara / Night"
-      ],
-      "title": "Umbreon ex PROMO :Unopen [MEP EN 110][EN](Ultra-Premium Collection \"30th Celebration Night\")",
-      "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFB1S3QzVjI1VjQ5QjVuNjV2Z2JtNUstWmpfZ3ZURmFJOUFPWUdacGZnN3psYUNBNHAzU2M0UzdyV1FieUhOcExSakwwdDVmNm84T2gtRnNsdw?oc=5",
-      "source": "SNKRDUNK",
-      "index": "Google News Großbritannien",
-      "de_proof": "",
-      "reddit": false,
-      "published": "2026-11-05T08:00:00+00:00",
-      "found": "2026-11-10T15:43:19+00:00"
-    }
-  ],
-  "batch": [
-    "871c75009c34810f3b3f32250b179d46"
-  ],
+  "pending": [],
+  "batch": [],
   "updated": "2026-11-10T15:43:19+00:00",
   "daily_check": {
     "day": "2026-11-10",
