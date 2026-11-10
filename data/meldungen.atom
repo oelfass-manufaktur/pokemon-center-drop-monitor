@@ -2,10 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>urn:pokemon-upc-monitor:de</id>
   <title>Nachtara &amp; Psiana – Hinweise zum Pokémon Center Deutschland</title>
-  <updated>2026-11-06T12:03:13+00:00</updated>
+  <updated>2026-11-10T15:43:19+00:00</updated>
   <author>
     <name>Pokémon UPC Monitor</name>
   </author>
+  <entry>
+    <id>urn:pokemon-upc-monitor:871c75009c34810f3b3f32250b179d46</id>
+    <updated>2026-11-10T15:43:19+00:00</updated>
+    <title>Drop-Hinweis gefunden · Nachtara / Night</title>
+    <link href="https://news.google.com/rss/articles/CBMiV0FVX3lxTFB1S3QzVjI1VjQ5QjVuNjV2Z2JtNUstWmpfZ3ZURmFJOUFPWUdacGZnN3psYUNBNHAzU2M0UzdyV1FieUhOcExSakwwdDVmNm84T2gtRnNsdw?oc=5" rel="alternate" />
+    <summary>Quelle: SNKRDUNK. Kaufbarkeit im deutschen Shop: unbekannt.</summary>
+  </entry>
   <entry>
     <id>urn:pokemon-upc-monitor:824471341de42da1f1d67fe048eb80f5</id>
     <updated>2026-11-06T12:03:13+00:00</updated>
