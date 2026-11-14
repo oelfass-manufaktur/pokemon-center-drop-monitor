@@ -79,27 +79,27 @@
   "batch": [],
   "updated": "2026-11-10T15:43:19+00:00",
   "daily_check": {
-    "day": "2026-11-14",
-    "checked": "2026-11-13T23:03:14+00:00",
+    "day": "2026-11-15",
+    "checked": "2026-11-14T23:03:12+00:00",
     "sources": {
       "news-de": {
         "entries": 3,
         "matches": 0
       },
       "news-en": {
-        "entries": 24,
+        "entries": 26,
         "matches": 3
       },
       "pokemon": {
-        "entries": 15,
+        "entries": 18,
         "matches": 1
       },
       "reddit": {
-        "entries": 21,
+        "entries": 23,
         "matches": 0
       },
       "shop-index": {
-        "entries": 10,
+        "entries": 0,
         "matches": 0
       },
       "shop-index-night": {
