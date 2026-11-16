@@ -79,23 +79,22 @@
   "batch": [],
   "updated": "2026-11-10T15:43:19+00:00",
   "daily_check": {
-    "day": "2026-11-16",
-    "checked": "2026-11-15T23:03:15+00:00",
+    "day": "2026-11-17",
+    "checked": "2026-11-16T23:03:12+00:00",
     "sources": {
       "news-de": {
         "entries": 4,
         "matches": 0
       },
       "news-en": {
-        "entries": 27,
+        "entries": 28,
         "matches": 3
       },
       "pokemon": {
-        "entries": 14,
-        "matches": 1
+        "error": "HTTP 429"
       },
       "reddit": {
-        "entries": 29,
+        "entries": 27,
         "matches": 0
       },
       "shop-index": {
