@@ -79,34 +79,35 @@
   "batch": [],
   "updated": "2026-11-10T15:43:19+00:00",
   "daily_check": {
-    "day": "2026-11-17",
-    "checked": "2026-11-16T23:03:12+00:00",
+    "day": "2026-11-18",
+    "checked": "2026-11-17T23:03:19+00:00",
     "sources": {
       "news-de": {
         "entries": 4,
         "matches": 0
       },
       "news-en": {
-        "entries": 28,
+        "entries": 31,
         "matches": 3
       },
       "pokemon": {
-        "error": "HTTP 429"
+        "entries": 16,
+        "matches": 1
       },
       "reddit": {
-        "entries": 27,
+        "entries": 16,
         "matches": 0
       },
       "shop-index": {
-        "entries": 0,
+        "entries": 10,
         "matches": 0
       },
       "shop-index-night": {
-        "entries": 0,
+        "entries": 10,
         "matches": 0
       },
       "shop-index-day": {
-        "entries": 0,
+        "entries": 10,
         "matches": 0
       }
     }
